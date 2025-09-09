@@ -1,0 +1,186 @@
+body{
+  margin: 0;
+  font-size: 5em;
+  background-image: url(img/bg.jpg);
+}
+.banner {
+  height: 100vh;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  flex-direction: column;
+  gap: 2rem;
+}
+.banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('img/valentin-petrov-m-mal-01.jpg');
+  background-size: cover;
+  background-position: center;
+  animation: bgZoomIn 4s ease-in-out 1 forwards;
+  z-index: -1;
+  pointer-events: none;
+}
+.banner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('img/after.png');
+  background-size: cover;
+  background-position: top;
+  transform: scale(2);
+  animation: bgZoomOut 4s ease-in-out 1 forwards;
+  z-index: -1;
+  pointer-events: none;
+}
+@keyframes bgZoomIn {
+  from {
+    transform: scale(1.2);
+  } to {
+    transform: scale(1);
+  }
+}
+@keyframes bgZoomOut {
+  from {
+    transform: scale(1);
+  } to {
+    transform: scale(2);
+  }
+}
+
+.title { position: relative; z-index: 1; }
+.wordmark { width: min(92vw, 1100px); height: auto; }
+.wordmark text {
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  font-size: 120px;
+  letter-spacing: 2px;
+  fill: transparent;
+  stroke: #ffffff;
+  stroke-width: 2.5;
+  stroke-dasharray: 1200;
+  stroke-dashoffset: 1200;
+  animation: drawText 3.8s ease-in-out forwards, fillText 3.8s ease-in-out forwards;
+}
+
+@keyframes drawText {
+  0% { stroke-dashoffset: 1200; }
+  80% { stroke-dashoffset: 240; }
+  100% { stroke-dashoffset: 0; }
+}
+
+@keyframes fillText {
+  0%, 80% { fill: transparent; }
+  100% { fill: #ffffff; }
+}
+
+svg path {
+  fill: transparent;
+  stroke: #fff;
+  stroke-width: 0.1;
+  stroke-dasharray: 50;
+  stroke-dashoffset: 50;
+  animation: textAnimation 4s ease-in-out 1 forwards;
+}
+@keyframes textAnimation {
+  0% {
+    stroke-dashoffset: 50;
+  }
+  80% {
+    fill: transparent;
+  }
+  100% {
+    fill: #fff;
+    stroke-dashoffset: 0;
+  }
+}
+
+.coming-soon { position: relative; z-index: 1; display: grid; place-items: center; }
+.coming-soon .sign {
+  width: min(90vw, 720px);
+  max-width: 95vw;
+  color: #111;
+}
+.coming-soon .sign-top {
+  position: relative;
+  background: #222;
+  border: 6px solid #333;
+  border-radius: 12px 12px 8px 8px;
+  padding: 14px 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4) inset, 0 10px 24px rgba(0,0,0,0.35);
+}
+.coming-soon .label {
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-weight: 800;
+  font-size: clamp(24px, 5vw, 48px);
+  color: #f8f8f8;
+  letter-spacing: 0.15em;
+}
+.coming-soon .light {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #ffea00;
+  box-shadow: 0 0 0 4px rgba(255,234,0,0.15), 0 0 18px 6px rgba(255,234,0,0.35);
+  animation: blink 1.2s infinite ease-in-out;
+}
+.coming-soon .light.right { animation-delay: 0.6s; }
+
+.coming-soon .sign-body {
+  margin-top: 10px;
+  height: 18px;
+  border: 6px solid #333;
+  border-top: none;
+  border-radius: 0 0 10px 10px;
+  background:
+    repeating-linear-gradient(135deg,
+      #ffc400 0 20px,
+      #111 20px 40px);
+  background-size: 200% 100%;
+  animation: stripeSlide 1.6s linear infinite;
+}
+
+.coming-soon .legs {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+  padding: 0 18px;
+}
+.coming-soon .leg {
+  width: 34%;
+  height: 10px;
+  background: #444;
+  position: relative;
+  transform-origin: top;
+}
+.coming-soon .leg.left { transform: skewX(-18deg); }
+.coming-soon .leg.right { transform: skewX(18deg); }
+.coming-soon .leg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+  transform: translateX(-100%);
+  animation: sheen 2.6s ease-in-out infinite;
+}
+
+@keyframes stripeSlide {
+  to { background-position: 200% 0; }
+}
+@keyframes blink {
+  0%, 20%, 100% { opacity: 1; filter: drop-shadow(0 0 12px rgba(255,234,0,0.6)); }
+  10% { opacity: 0.3; filter: drop-shadow(0 0 0 rgba(0,0,0,0)); }
+}
+@keyframes sheen {
+  0% { transform: translateX(-100%); }
+  60% { transform: translateX(200%); }
+  100% { transform: translateX(200%); }
+}
